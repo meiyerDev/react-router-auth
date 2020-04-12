@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { AuthProvider } from './AuthProvider'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {
+	BrowserRouter as Router,
+	Switch,
+} from 'react-router-dom'
+import PrivateRoute from './components/PrivateRoute'
+import PublicRoute from './components/PublicRoute'
+
+import Login from './screen/auth/Login'
+import Dashboard from './screen/Dashboard'
+
+function App(){
+	return(
+		<AuthProvider>
+			<Router>
+				<Switch>
+					<PublicRoute path='/acceder' component={Login}/>
+					<PrivateRoute path='/inicio' component={Dashboard}/>
+				</Switch>
+			</Router>
+		</AuthProvider>
+	)
 }
 
 export default App;
